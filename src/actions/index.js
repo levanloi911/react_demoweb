@@ -5,3 +5,8 @@ export const getblogs =()=>
         type: types.getblogs
     }
 }
+export const getparent = () => {
+    return {
+        type: types.getparent
+    }
+}

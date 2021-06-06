@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import * as types from '../actions/Actiontypes';
 // const [blog, setblog] =useState([])
 import db from '../firebase.config';
@@ -24,6 +23,7 @@ var myreducer =(state = blog, action)=>{
                     });
                 })
             return docs;
+    
             default: return state;
     }
 }

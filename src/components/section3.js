@@ -1,42 +1,71 @@
 import '../App.css';
 import React, { useEffect, useState } from "react";
 import db from '../firebase.config';
-import {connect} from 'react-redux'
-import {getblogs} from '../actions/index'
-const mapStateToProps = (state)=>{
-    return{
-        get_blog: state.getblog
-    }
-}
-const mapDispatchToProps = (dispatch) => (
-    () => dispatch(getblogs())
-    );
-export default connect(mapStateToProps, mapDispatchToProps)(Section3)
- function Section3(props) {
-     const [kinhdoanh, setkinhdoanh] = useState([]);
-  const getkinhdoanh = async () => {
-      db.collection("Category").where("name", "==", "newblogs").onSnapshot((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-              db.collection("Blogs").where("id_c", "==", doc.id).onSnapshot((querySnapshot) => {
-                  const docs = [];
-                  querySnapshot.forEach((doc) => {
-                      docs.push({
-                          ...doc.data(),
-                          id: doc.id
-                      });
+ export default function Section3(props) {
+ 
+const [blognew, setblognew] = useState([]);
+var [parent, setparent] = useState([]);
+const [post, setpost] = useState([]);
 
-                  });
+const getparent = async () => {
+     db.collection("parent").onSnapshot((querySnapshot) => {
+         var arr=[]
+        querySnapshot.forEach((doc) => {
+            arr.push({
+                ...doc.data(),
+                id: doc.id
+            });
+        });
+        setparent(arr)
+        getblog(arr);
+        
+    })
+};
+const getblog = async (arr_pr) => {
+    var arr = []
+    db.collection("Blogs").onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            arr.push({
+                ...doc.data(),
+                id: doc.id
+            })
 
-                  setkinhdoanh(docs);
-              })
+        });
+       const post_new= arr_pr.map((pr)=>{
+           const selectedPosts = arr.filter((post) => post.id_p === pr.id);
+            return {
+                ...pr,
+                posts: selectedPosts
+            }
+              
+           })
+           setpost(post_new)
+    })
 
-          });
-      })
-  };
+};
+
+
+const getblognew = async () => {
+    db.collection("Blogs").onSnapshot((querySnapshot) => {
+        var arr = []
+        querySnapshot.forEach((doc) => {
+            arr.push({
+                ...doc.data(),
+                id: doc.id
+            })
+
+        });
+        setblognew(arr);
+    })
+};
+
      useEffect(() => {
-         getkinhdoanh();
+         getparent();
+         getblognew();
+
          
      }, []);
+
      
     return(
       
@@ -44,23 +73,24 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                       
      <div className="container has_border flexbox">
          <div className="col-left col-small" id="automation_TV0">
-             {
-                 props.get_blog.map((blog) => (
-             <article className="item-news item-news-common">
-                 <h3 className="title-news"><a href=""
-                         title="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19">{blog.title}</a>
-                 </h3>
-                 <div className="thumb-art">
-                     <a href="" className="thumb thumb-5x3"
-                         title="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19">
-                         <picture>
-                             <img itemprop="contentUrl" loading="lazy"
-                                 alt="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19"
-                                 className="lazy loading"
-                                 src= {blog.image}/>
-                         </picture>
-                     </a></div>
-                 <p className="description"><a href=""
+            {
+                 blognew.slice(4,12).map((blog) => (
+                     
+                <article  key={blog.id} className="item-news item-news-common">
+                    <h3 className="title-news"><a href=""
+                            title="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19">{blog.title}</a>
+                    </h3>
+                    <div className="thumb-art">
+                        <a href="" className="thumb thumb-5x3"
+                            title="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19">
+                            <picture>
+                                <img itemprop="contentUrl" loading="lazy"
+                                    alt="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19"
+                                    className="lazy loading"
+                                    src= {blog.image}/>
+                            </picture>
+                        </a></div>
+                    <p className="description"><a href=""
                          title="Bắc Ninh kêu gọi y bác sĩ hưu trí, sinh viên tham chiến Covid-19>">{blog.description}</a><span
                          className="meta-news">
                          <a className="count_cmt" href="">
@@ -74,8 +104,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                              <span className="font_icon widget-comment-4275848-1">6</span>
                          </a>
                      </span></p>
-             </article>
-                   ))}  </div>
+                 </article>
+            ))} 
+            </div>
          <div className="col-right col-medium">
             <div className="box-category box-cate-featured box-covid-2021 has-border">
                  <article className="item-news item-news-common hidden" id="live_topic_covid">
@@ -285,10 +316,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                      </div>
                  </div>
              </div>
+             {
+                 post.slice(0,7).map((blog) => {
+             return(
+                   
             <div className="box-category box-cate-featured box-cate-featured-v2 has-border">
                  <hgroup className="width_common title-box-category kinhdoanh">
                      <h2 className="parent-cate">
-                         <a href="/" className="inner-title" title="Kinh doanh">Kinh doanh</a>
+                         <a href="/" className="inner-title" title="Kinh doanh">{blog.Name}</a>
                          </h2>
                          <span className="sub-cate"><a href="//quoc-te" title="Quốc tế">Quốc
                              tế</a></span><span className="sub-cate"><a href="//doanh-nghiep" title="Doanh nghiệp">Doanh
@@ -303,29 +338,33 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                              title="Vhome">Vhome</a></span>
                  </hgroup>
                  <div className="width_common content-box-category flexbox">
-                       {
-                           kinhdoanh.slice(0, 1).map((kd) => (
+                        {
+
+                            blog.posts.slice(0, 1).map((post_content) => {
+                                        return (
                      <article className="item-news full-thumb flexbox ">
-                         <div className="thumb-art">
+                                       
+                         <div key={post_content.id} className="thumb-art">
                              <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
                                  data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
                                  className="thumb thumb-5x3" title="Giá cả leo thang bủa vây người Mỹ">
                                  <picture>
                                      <img loading="lazy" intrinsicsize="380x228" alt="Giá cả leo thang bủa vây người Mỹ"
                                          className="lazy lazied"
-                                         src={kd.image} data-src="https://i1-kinhdoanh.vnecdn.net/2021/05/10/im335914-1620619489-8938-1620619825.jpg?w=380&amp;h=228&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=GV6AEtTSVhvT4V0RqUb6eQ">
+                                         src={post_content.image} data-src="https://i1-kinhdoanh.vnecdn.net/2021/05/10/im335914-1620619489-8938-1620619825.jpg?w=380&amp;h=228&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=GV6AEtTSVhvT4V0RqUb6eQ">
                                      </img> </picture>
                              </a>
                          </div>
+                              
                          <div className="wrap-sum-news">
                              <h3 className="title-news"><a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
                                      data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">{kd.title}</a></h3>
+                                     title="Giá cả leo thang bủa vây người Mỹ">{post_content.title}</a></h3>
                              <p className="description">
                                  <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
                                      data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
                                      title="Giá cả leo thang bủa vây người Mỹ">
-                                     {kd.description}
+                                     {post_content.description}
                                  </a>
                                  <span className="meta-news">
                                      <a className="count_cmt" href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html">
@@ -342,18 +381,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                              </p>
                          </div>
                      </article>
-                    
-                        ))} 
-                         {
-                             kinhdoanh.slice(1,2).map((kd) => (
+                        )})}
+                        {
+                            blog.posts.slice(1, 2).map((post_content) => {
+                                        return (                        
                         < article className = "item-news article-sub-right" >
                          <h3 className="title-news"><a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0">{kd.title}</a></h3>
+                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0">{post_content.title}</a></h3>
                          <p className="description">
                              <a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
                                  data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0"
                                  title="Thời trang Việt lép vế trước đại gia ngoại">
-                                {kd.description}
+                                {post_content.description}
                              </a>
                              <span className="meta-news">
                                  <a className="count_cmt"
@@ -370,113 +409,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                              </span>
                          </p>
                      </article>
-                     ))
-                     }
+                     )})}
                      <div className="sub-news-cate flexbox">
-                         {kinhdoanh.slice(2,5).map((kd)=>(
-                         <article className="item-news">
-                             <h3 className="title-news"><a
-                                     href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-3&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                     title="VASEP kiến nghị TP HCM hoãn thu phí hạ tầng cảng biển">{kd.title}</a><span className="meta-news">
-                                     <a className="count_cmt"
-                                         href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html">
-                                         <svg className="ic ic-comment">
-                                             <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                     <path
-                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                     </path>
-                                                 </svg></use>
-                                         </svg>
-                                         <span className="font_icon widget-comment-4276356-1"></span>
-                                     </a>
-                                 </span></h3>
-                         </article>
-                         ))
-                         } </div>
-                 </div>
-             </div>
-            <div className="box-category box-cate-featured box-cate-featured-v2 has-border">
-                <hgroup class="width_common title-box-category thethao">
-                    <h2 class="parent-cate"><a href="/the-thao" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-TheThao&amp;vn_medium=Title-TheThao&amp;vn_term=Desktop" class="inner-title" title="Thể thao" data-itm-added="1">Thể thao</a></h2><span class="sub-cate"><a href="/bong-da" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-TheThao&amp;vn_medium=Title-BongDa&amp;vn_term=Desktop" title="Bóng đá" data-itm-added="1">Bóng đá</a></span><span class="sub-cate"><a href="/the-thao/du-lieu-bong-da" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-TheThao&amp;vn_medium=Title-LichThiDau&amp;vn_term=Desktop" title="Lịch thi đấu" data-itm-added="1">Lịch thi đấu</a></span><span class="sub-cate"><a href="/the-thao/tennis" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-TheThao&amp;vn_medium=Title-Tennis&amp;vn_term=Desktop" title="Tennis" data-itm-added="1">Tennis</a></span><span class="sub-cate"><a href="https://vm.vnexpress.net/" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-TheThao&amp;vn_medium=Title-Vm2021&amp;vn_term=Desktop" title="VM 2021" data-itm-added="1">VM 2021</a></span><span class="sub-cate"><a href="https://vrace.vnexpress.net/" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-TheThao&amp;vn_medium=Title-Vrace&amp;vn_term=Desktop" title="V-Race" data-itm-added="1">V-Race</a></span>
-                </hgroup>
-                <div className="width_common content-box-category flexbox">
-                       {
-                           kinhdoanh.slice(0, 1).map((kd) => (
-                     <article className="item-news full-thumb flexbox ">
-                         <div className="thumb-art">
-                             <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                 className="thumb thumb-5x3" title="Giá cả leo thang bủa vây người Mỹ">
-                                 <picture>
-                                     <img loading="lazy" intrinsicsize="380x228" alt="Giá cả leo thang bủa vây người Mỹ"
-                                         className="lazy lazied"
-                                         src={kd.image} data-src="https://i1-kinhdoanh.vnecdn.net/2021/05/10/im335914-1620619489-8938-1620619825.jpg?w=380&amp;h=228&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=GV6AEtTSVhvT4V0RqUb6eQ">
-                                     </img> </picture>
-                             </a>
-                         </div>
-                         <div className="wrap-sum-news">
-                             <h3 className="title-news"><a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">{kd.title}</a></h3>
-                             <p className="description">
-                                 <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">
-                                     {kd.description}
-                                 </a>
-                                 <span className="meta-news">
-                                     <a className="count_cmt" href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html">
-                                         <svg className="ic ic-comment">
-                                             <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                     <path
-                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                     </path>
-                                                 </svg></use>
-                                         </svg>
-                                         <span className="font_icon widget-comment-4275588-1">33</span>
-                                     </a>
-                                 </span>
-                             </p>
-                         </div>
-                     </article>
-                    
-                        ))} 
                          {
-                             kinhdoanh.slice(1,2).map((kd) => (
-                        < article className = "item-news article-sub-right" >
-                         <h3 className="title-news"><a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0">{kd.title}</a></h3>
-                         <p className="description">
-                             <a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                 title="Thời trang Việt lép vế trước đại gia ngoại">
-                                {kd.description}
-                             </a>
-                             <span className="meta-news">
-                                 <a className="count_cmt"
-                                     href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html">
-                                     <svg className="ic ic-comment">
-                                         <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                 <path
-                                                     d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                 </path>
-                                             </svg></use>
-                                     </svg>
-                                     <span className="font_icon widget-comment-4275612-1">96</span>
-                                 </a>
-                             </span>
-                         </p>
-                     </article>
-                     ))
-                     }
-                     <div className="sub-news-cate flexbox">
-                         {kinhdoanh.slice(2,5).map((kd)=>(
+                             blog.posts.slice(2, 5).map((post_content) => {
+                                         return (
                          <article className="item-news">
                              <h3 className="title-news"><a
                                      href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html"
                                      data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-3&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                     title="VASEP kiến nghị TP HCM hoãn thu phí hạ tầng cảng biển">{kd.title}</a><span className="meta-news">
+                                     title="VASEP kiến nghị TP HCM hoãn thu phí hạ tầng cảng biển">{post_content.title}</a><span className="meta-news">
                                      <a className="count_cmt"
                                          href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html">
                                          <svg className="ic ic-comment">
@@ -490,211 +432,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Section3)
                                      </a>
                                  </span></h3>
                          </article>
-                         ))
-                         } </div>
+                     )})}
+
+                          </div>
                  </div>
              </div>
-                  
-            <div className="box-category box-cate-featured box-cate-featured-v2 has-border">
-                 <hgroup class="width_common title-box-category giaitri">
-                    <h2 class="parent-cate"><a href="/giai-tri" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-GiaiTri&amp;vn_medium=Title-GiaiTri&amp;vn_term=Desktop" class="inner-title" title="Giải trí" data-itm-added="1">Giải trí</a></h2><span class="sub-cate"><a href="/giai-tri/gioi-sao" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-GiaiTri&amp;vn_medium=Title-GioiSao&amp;vn_term=Desktop" title="Giới sao" data-itm-added="1">Giới sao</a></span><span class="sub-cate"><a href="/giai-tri/phim" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-GiaiTri&amp;vn_medium=Title-Phim&amp;vn_term=Desktop" title="Phim" data-itm-added="1">Phim</a></span><span class="sub-cate"><a href="/giai-tri/nhac" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-GiaiTri&amp;vn_medium=Title-Nhac&amp;vn_term=Desktop" title="Nhạc" data-itm-added="1">Nhạc</a></span><span class="sub-cate"><a href="/giai-tri/thoi-trang" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-GiaiTri&amp;vn_medium=Title-ThoiTrang&amp;vn_term=Desktop" title="Thời trang" data-itm-added="1">Thời trang</a></span><span class="sub-cate"><a href="/giai-tri/sach" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-GiaiTri&amp;vn_medium=Title-Sach&amp;vn_term=Desktop" title="Sách" data-itm-added="1">Sách</a></span>
-                </hgroup>
-                  <div className="width_common content-box-category flexbox">
-                       {
-                           kinhdoanh.slice(0, 1).map((kd) => (
-                     <article className="item-news full-thumb flexbox ">
-                         <div className="thumb-art">
-                             <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                 className="thumb thumb-5x3" title="Giá cả leo thang bủa vây người Mỹ">
-                                 <picture>
-                                     <img loading="lazy" intrinsicsize="380x228" alt="Giá cả leo thang bủa vây người Mỹ"
-                                         className="lazy lazied"
-                                         src={kd.image} data-src="https://i1-kinhdoanh.vnecdn.net/2021/05/10/im335914-1620619489-8938-1620619825.jpg?w=380&amp;h=228&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=GV6AEtTSVhvT4V0RqUb6eQ">
-                                     </img> </picture>
-                             </a>
-                         </div>
-                         <div className="wrap-sum-news">
-                             <h3 className="title-news"><a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">{kd.title}</a></h3>
-                             <p className="description">
-                                 <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">
-                                     {kd.description}
-                                 </a>
-                                 <span className="meta-news">
-                                     <a className="count_cmt" href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html">
-                                         <svg className="ic ic-comment">
-                                             <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                     <path
-                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                     </path>
-                                                 </svg></use>
-                                         </svg>
-                                         <span className="font_icon widget-comment-4275588-1">33</span>
-                                     </a>
-                                 </span>
-                             </p>
-                         </div>
-                     </article>
-                    
-                        ))} 
-                         {
-                             kinhdoanh.slice(1,2).map((kd) => (
-                        < article className = "item-news article-sub-right" >
-                         <h3 className="title-news"><a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0">{kd.title}</a></h3>
-                         <p className="description">
-                             <a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                 title="Thời trang Việt lép vế trước đại gia ngoại">
-                                {kd.description}
-                             </a>
-                             <span className="meta-news">
-                                 <a className="count_cmt"
-                                     href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html">
-                                     <svg className="ic ic-comment">
-                                         <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                 <path
-                                                     d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                 </path>
-                                             </svg></use>
-                                     </svg>
-                                     <span className="font_icon widget-comment-4275612-1">96</span>
-                                 </a>
-                             </span>
-                         </p>
-                     </article>
-                     ))
-                     }
-                     <div className="sub-news-cate flexbox">
-                         {kinhdoanh.slice(2,5).map((kd)=>(
-                         <article className="item-news">
-                             <h3 className="title-news"><a
-                                     href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-3&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                     title="VASEP kiến nghị TP HCM hoãn thu phí hạ tầng cảng biển">{kd.title}</a><span className="meta-news">
-                                     <a className="count_cmt"
-                                         href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html">
-                                         <svg className="ic ic-comment">
-                                             <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                     <path
-                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                     </path>
-                                                 </svg></use>
-                                         </svg>
-                                         <span className="font_icon widget-comment-4276356-1"></span>
-                                     </a>
-                                 </span></h3>
-                         </article>
-                         ))
-                         } </div>
-                 </div>
-             </div>
-                  
-            <div className="box-category box-cate-featured box-cate-featured-v2 has-border">
-              <hgroup class="width_common title-box-category suckhoe">
-                    <h2 class="parent-cate"><a href="/suc-khoe" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-SucKhoe&amp;vn_term=Desktop" class="inner-title" title="Sức khỏe" data-itm-added="1">Sức khỏe</a></h2><span class="sub-cate"><a href="/suc-khoe/tin-tuc" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-TinTuc&amp;vn_term=Desktop" title="Tin tức" data-itm-added="1">Tin tức</a></span><span class="sub-cate"><a href="/suc-khoe/dinh-duong" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-DinhDuong&amp;vn_term=Desktop" title="Dinh dưỡng" data-itm-added="1">Dinh dưỡng</a></span><span class="sub-cate"><a href="/suc-khoe/khoe-dep" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-KhoeDep&amp;vn_term=Desktop" title="Khỏe đẹp" data-itm-added="1">Khỏe đẹp</a></span><span class="sub-cate"><a href="/suc-khoe/cac-benh" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-CacBenh&amp;vn_term=Desktop" title="Các bệnh" data-itm-added="1">Các bệnh</a></span><span class="sub-cate"><a href="/suc-khoe/ung-thu" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-UngThu&amp;vn_term=Desktop" title="Ung thư" data-itm-added="1">Ung thư</a></span><span class="sub-cate"><a href="/suc-khoe/vaccine" data-itm-source="#vn_source=Home&amp;vn_campaign=Box-SucKhoe&amp;vn_medium=Title-Vaccine&amp;vn_term=Desktop" title="Vaccine" data-itm-added="1">Vaccine</a></span>
-                </hgroup>
-               <div className="width_common content-box-category flexbox">
-                       {
-                           kinhdoanh.slice(0, 1).map((kd) => (
-                     <article className="item-news full-thumb flexbox ">
-                         <div className="thumb-art">
-                             <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                 className="thumb thumb-5x3" title="Giá cả leo thang bủa vây người Mỹ">
-                                 <picture>
-                                     <img loading="lazy" intrinsicsize="380x228" alt="Giá cả leo thang bủa vây người Mỹ"
-                                         className="lazy lazied"
-                                         src={kd.image} data-src="https://i1-kinhdoanh.vnecdn.net/2021/05/10/im335914-1620619489-8938-1620619825.jpg?w=380&amp;h=228&amp;q=100&amp;dpr=1&amp;fit=crop&amp;s=GV6AEtTSVhvT4V0RqUb6eQ">
-                                     </img> </picture>
-                             </a>
-                         </div>
-                         <div className="wrap-sum-news">
-                             <h3 className="title-news"><a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">{kd.title}</a></h3>
-                             <p className="description">
-                                 <a href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-1&amp;vn_term=Desktop&amp;vn_thumb=1"
-                                     title="Giá cả leo thang bủa vây người Mỹ">
-                                     {kd.description}
-                                 </a>
-                                 <span className="meta-news">
-                                     <a className="count_cmt" href="gia-ca-leo-thang-bua-vay-nguoi-my-4275588.html">
-                                         <svg className="ic ic-comment">
-                                             <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                     <path
-                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                     </path>
-                                                 </svg></use>
-                                         </svg>
-                                         <span className="font_icon widget-comment-4275588-1">33</span>
-                                     </a>
-                                 </span>
-                             </p>
-                         </div>
-                     </article>
-                    
-                        ))} 
-                         {
-                             kinhdoanh.slice(1,2).map((kd) => (
-                        < article className = "item-news article-sub-right" >
-                         <h3 className="title-news"><a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0">{kd.title}</a></h3>
-                         <p className="description">
-                             <a href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html"
-                                 data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-2&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                 title="Thời trang Việt lép vế trước đại gia ngoại">
-                                {kd.description}
-                             </a>
-                             <span className="meta-news">
-                                 <a className="count_cmt"
-                                     href="thoi-trang-viet-lep-ve-truoc-dai-gia-ngoai-4275612.html">
-                                     <svg className="ic ic-comment">
-                                         <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                 <path
-                                                     d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                 </path>
-                                             </svg></use>
-                                     </svg>
-                                     <span className="font_icon widget-comment-4275612-1">96</span>
-                                 </a>
-                             </span>
-                         </p>
-                     </article>
-                     ))
-                     }
-                     <div className="sub-news-cate flexbox">
-                         {kinhdoanh.slice(2,5).map((kd)=>(
-                         <article className="item-news">
-                             <h3 className="title-news"><a
-                                     href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html"
-                                     data-itm-source="#vn_source=Home&amp;vn_campaign=Box-KinhDoanh&amp;vn_medium=Item-3&amp;vn_term=Desktop&amp;vn_thumb=0"
-                                     title="VASEP kiến nghị TP HCM hoãn thu phí hạ tầng cảng biển">{kd.title}</a><span className="meta-news">
-                                     <a className="count_cmt"
-                                         href="vasep-kien-nghi-tp-hcm-hoan-thu-phi-ha-tang-cang-bien-4276356.html">
-                                         <svg className="ic ic-comment">
-                                             <use href="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
-                                                     <path
-                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
-                                                     </path>
-                                                 </svg></use>
-                                         </svg>
-                                         <span className="font_icon widget-comment-4276356-1"></span>
-                                     </a>
-                                 </span></h3>
-                         </article>
-                         ))
-                         } </div>
-                 </div>
-             </div>
-                  
-            {/*
-             <!-- giá vàng --> */}
+                 )})
+            }
             </div>
      </div>
     

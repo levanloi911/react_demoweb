@@ -55,7 +55,6 @@ export function Section4(){
      <div id="_hottopic" className="lazier hidden"></div>
  </section>
 
-//  video
 <section class="section section_container section_video">
      <div class="container animated animatedFadeInUp fadeInUp" id="automation_Video">
          <div class="width_common inner-section-video">
