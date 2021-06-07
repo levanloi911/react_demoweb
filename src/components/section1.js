@@ -1,29 +1,48 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react'
 import {Section2} from './section2'
+import {Hearder} from './hearder'
+
 import Section3 from './section3'
 import {Section4} from './section4'
-
-import Section5 from './section5'
 import {Section6} from './section6'
 import {Section7} from './section7'
 import {Section8} from './section8'
+import db from '../firebase.config';
 import {connect} from 'react-redux'
 import * as type from '../actions/index'
-const mapStateToProps = (state) => {
-    return {
-        get_pr: state.parent
-    }
-}
-const mapDispatchToProps = (dispatch) => (
-    () => dispatch(type.getparent())
-);
-export default connect(mapStateToProps, mapDispatchToProps)(Section1)
-  function Section1(props) {
+// const mapStateToProps = (state) => {
+//     return {
+//         get_pr: state.parent
+//     }
+// }
+// const mapDispatchToProps = (dispatch) => (
+//     () => dispatch(type.getparent())
+// );
+// export default connect(mapStateToProps, mapDispatchToProps)(Section1)
+ export default function Section1(props) {
+     const [parent, setparent]=useState([])
+     const getparent = async () => {
+         db.collection("parent").onSnapshot((querySnapshot) => {
+             var arr = []
+             querySnapshot.forEach((doc) => {
+                 arr.push({
+                     ...doc.data(),
+                     id: doc.id
+                 });
+             });
+             setparent(arr)
+
+         })
+     };
+     useEffect(()=>{
+         getparent();
+     },[])
      
 return(
     <body>
-    <div>
+        < Hearder />  
+    <div>   
         <section className="section wrap-main-nav">
      <nav className="main-nav">
          <ul className="parent">
@@ -42,10 +61,11 @@ return(
                  </a>
              </li>
              {
-             props.get_pr.map((parent)=>(
+             parent.map((pr)=>(
                 <li className="thoisu">
-                    <a title="Thời sự" href="/">
-                        {parent.className}</a>
+                    <a a title = "Thời sự"
+                    href = {`/product/${pr.id}`} >
+                        {pr.Name}</a>
                  </li>
              ))}
              
@@ -57,14 +77,11 @@ return(
     </div>
 
                 <Section2/>
-                <Section3 pr = {props.get_pr} />
+                <Section3 />
                 < Section4 />
-                < Section5 parent = {props.get_pr} />
-
                 < Section6 />
                 < Section7 />
                 < Section8 />
-    {/* footer */}
 
 
     <footer className="footer">

@@ -8,9 +8,8 @@ import React, {
 export function Section2(){
      const [blogs, setBlogs] = useState([]);
      const getBlogs = async () => {
-         db.collection("Category").where("name", "==", "newblogs").onSnapshot((querySnapshot) => {
-             querySnapshot.forEach((doc) => {
-                 db.collection("Blogs").where("id_c", "==", doc.id).onSnapshot((querySnapshot) => {
+       
+                 db.collection("Blogs").onSnapshot((querySnapshot) => {
                      const docs = [];
                      querySnapshot.forEach((doc) => {
                          docs.push({
@@ -22,8 +21,7 @@ export function Section2(){
                      setBlogs(docs);
                  })
            
-         });
-     })};
+      };
      useEffect(() => {
          getBlogs();
      }, []);

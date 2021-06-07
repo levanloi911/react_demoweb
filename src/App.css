@@ -2258,7 +2258,6 @@ table {
 
 .col-boxcate .item-news .title-news {
     font-weight: bold;
-    font-size: 15px;
     margin-bottom: 0;
 }
 
@@ -2484,7 +2483,9 @@ table {
 }
 
 
-
+.colbox-left .item-news .description {
+    font-size: 15px;
+}
 
 
 .title-box-category .inner-title:before {

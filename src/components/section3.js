@@ -1,6 +1,7 @@
 import '../App.css';
 import React, { useEffect, useState } from "react";
 import db from '../firebase.config';
+import Section5 from './section5'
  export default function Section3(props) {
  
 const [blognew, setblognew] = useState([]);
@@ -17,11 +18,25 @@ const getparent = async () => {
             });
         });
         setparent(arr)
+        getcategories(arr)
         getblog(arr);
         
     })
 };
-const getblog = async (arr_pr) => {
+const getcategories = async(parent)=>{
+ db.collection("categories").onSnapshot((querySnapshot) => {
+     var arr_c = []
+     querySnapshot.forEach((doc) => {
+         arr_c.push({
+             ...doc.data(),
+             id: doc.id
+         });
+     });
+     getblog(parent, arr_c);
+
+ })
+}
+const getblog = async (arr_pr, arr_c) => {
     var arr = []
     db.collection("Blogs").onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -31,10 +46,19 @@ const getblog = async (arr_pr) => {
             })
 
         });
+        // const categories = arr_c.map((ct) => {
+        //     const selectedCategories = arr.filter((blog) => blog.idparent === ct.id);
+        //     return {
+        //         ...ct,
+        //         posts: selectedCategories
+        //     }
+        // })
        const post_new= arr_pr.map((pr)=>{
            const selectedPosts = arr.filter((post) => post.id_p === pr.id);
+           const selectedCategories = (arr_c || []).filter((ct) => ct.idparent === pr.id);
             return {
                 ...pr,
+                id_c: selectedCategories,
                 posts: selectedPosts
             }
               
@@ -68,7 +92,7 @@ const getblognew = async () => {
 
      
     return(
-      
+     <div>
     <section className="section section_stream_home section_container">
                       
      <div className="container has_border flexbox">
@@ -322,20 +346,14 @@ const getblognew = async () => {
                    
             <div className="box-category box-cate-featured box-cate-featured-v2 has-border">
                  <hgroup className="width_common title-box-category kinhdoanh">
-                     <h2 className="parent-cate">
+                    <h2 className="parent-cate">
                          <a href="/" className="inner-title" title="Kinh doanh">{blog.Name}</a>
-                         </h2>
-                         <span className="sub-cate"><a href="//quoc-te" title="Quốc tế">Quốc
-                             tế</a></span><span className="sub-cate"><a href="//doanh-nghiep" title="Doanh nghiệp">Doanh
-                             nghiệp</a></span><span className="sub-cate"><a href="//chung-khoan"
-                             title="Chứng khoán">Chứng khoán</a></span><span className="sub-cate"><a
-                             href="//bat-dong-san" title="Bất động sản">Bất động
-                             sản</a></span><span className="sub-cate"><a href="https://startup./"
-                             title="Startup">Startup</a></span>
-                     <span className="sub-cate"><a href="//bao-hiem" title="Bảo hiểm">Bảo hiểm</a></span>
-                     <span className="sub-cate"><a
-                             href="https://vhome.?utm_source=VnExpress_Desktop&amp;utm_medium=Home_Menu&amp;utm_campaign=HaVien_KinhDoanh"
-                             title="Vhome">Vhome</a></span>
+                    </h2>
+                    {blog.id_c.map((categori)=>{
+                        return(
+                         <span className="sub-cate"><a href={`/product/${categori.id}`} title="Quốc tế">{categori.name}</a></span>
+                            )})}
+                             
                  </hgroup>
                  <div className="width_common content-box-category flexbox">
                         {
@@ -441,7 +459,11 @@ const getblognew = async () => {
             }
             </div>
      </div>
-    
+                
  </section>
+    < Section5 pr={post} />
+    
+    </div>
+    
     )
 }
