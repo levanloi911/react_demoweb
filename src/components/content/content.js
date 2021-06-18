@@ -21,7 +21,8 @@ export default function Content(props){
                                id: doc.id
                            })
                        });
-                       setBlog(arr1)
+                       const filter1= arr1.filter((blog)=> blog.id != id)
+                       setBlog(filter1)
                        const filter = arr1.filter((blog) => blog.id === id);
                        setDetail(filter)
         })

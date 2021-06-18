@@ -73,7 +73,6 @@ export function Section2(){
                  </article>
                  ))
                  }
-                 
                  <div className="sub-news-top">
                      <div className="inner-sub-news-top">
                          <div className="scroll-sub-featured">

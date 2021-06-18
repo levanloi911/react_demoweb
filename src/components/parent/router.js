@@ -34,6 +34,10 @@ export default  function _Router(props){
         <div>
             <Section1 blog={blog} parent={NAME}/>
             <Section2 blog={blog}/>
+           
+            <Section3/>
+            <Section4/>
+             <Section3/>
         </div>
     )
 }
