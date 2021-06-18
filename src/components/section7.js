@@ -30,12 +30,12 @@ export function Section7(){
                             <!-- Add Arrows --> */}
                             <div className="swiper-button-vne swiper-button-next-photo" aria-label="Next slide">
                                 <svg className="ic ic-arrow-down">
-                                    <use class="#Arrow-Right-1"></use>
+                                    <use className="#Arrow-Right-1"></use>
                                 </svg>
                             </div>
                             <div className="swiper-button-vne swiper-button-prev-photo" aria-label="Previous slide">
                                 <svg className="ic ic-arrow-up">
-                                    <use class="#Arrow-Right-1"></use>
+                                    <use className="#Arrow-Right-1"></use>
                                 </svg>
                             </div>
                             <span className="swiper-notification" aria-atomic="true"></span>
@@ -65,7 +65,7 @@ export function Section7(){
                                         title="Giải trí" href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -96,7 +96,7 @@ export function Section7(){
                                         href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -123,7 +123,7 @@ export function Section7(){
                                         href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -152,7 +152,7 @@ export function Section7(){
                                         title="Du lịch" href="/">Du lịch</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -180,7 +180,7 @@ export function Section7(){
                                     <a className="cat hidden c-parsed"></a>
                                     <a className="count_cmt" href="" style={{display: 'inline-block'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -212,7 +212,7 @@ export function Section7(){
                                         title="Giải trí" href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -242,7 +242,7 @@ export function Section7(){
                                         href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -269,7 +269,7 @@ export function Section7(){
                                         href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -298,7 +298,7 @@ export function Section7(){
                                         title="Du lịch" href="/">Du lịch</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -325,7 +325,7 @@ export function Section7(){
                                     <a className="cat hidden c-parsed"></a>
                                     <a className="count_cmt" href="" style={{display: 'inline-block'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -357,7 +357,7 @@ export function Section7(){
                                         title="Giải trí" href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -388,7 +388,7 @@ export function Section7(){
                                         href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -415,7 +415,7 @@ export function Section7(){
                                         href="/giai-tri">Giải trí</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -443,7 +443,7 @@ export function Section7(){
                                         lịch</a>
                                     <a className="count_cmt" href="" style={{display: 'none'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>
@@ -470,7 +470,7 @@ export function Section7(){
                                     <a className="cat hidden c-parsed"></a>
                                     <a className="count_cmt" href="" style={{display: 'inline-block'}}>
                                         <svg className="ic ic-comment">
-                                            <use class="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
+                                            <use className="#Comment-Reg"><svg id="Comment-Reg" viewBox="0 0 32 32">
                                                     <path
                                                         d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z">
                                                     </path>

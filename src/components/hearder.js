@@ -1,7 +1,52 @@
 import '../App.css';
+import React, {useState, useEffect} from 'react'
+
 
  export function Hearder(){
-  
+     const [getdate, setDate] = useState('')
+   const getdatecurent = () => {
+       // Khai báo đối tượng Date
+       var date = new Date();
+
+       // Lấy số thứ tự của ngày hiện tại
+       var current_day = date.getDay();
+
+       // Biến lưu tên của thứ
+       var day_name = '';
+
+       // Lấy tên thứ của ngày hiện tại
+       switch (current_day) {
+           case 0:
+               day_name = "Chủ nhật";
+               break;
+           case 1:
+               day_name = "Thứ hai";
+               break;
+           case 2:
+               day_name = "Thứ ba";
+               break;
+           case 3:
+               day_name = "Thứ tư";
+               break;
+           case 4:
+               day_name = "Thứ năm";
+               break;
+           case 5:
+               day_name = "Thứ sau";
+               break;
+           case 6:
+               day_name = "Thứ bảy";
+       }
+       var today = new Date();
+       var dd = String(today.getDate()).padStart(2, '0');
+       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+       var yyyy = today.getFullYear();
+       today = dd + '/' + mm + '/' + yyyy;
+       setDate(day_name + ', ' + today)
+   }
+   useEffect(()=>{
+    getdatecurent();
+   },[])
         return (
             <div>
                 <header className="section top-header">
@@ -12,7 +57,7 @@ import '../App.css';
                  <img src="https://s1.vnecdn.net/vnexpress/restruct/i/v387/v2_2019/pc/graphics/logo.svg"
                      alt="VnExpress - Bao tieng Viet nhieu nguoi xem nhat" />
              </a>
-         </h1> <span className="time-now">Chủ nhật, 9/5/2021</span>
+         </h1> <span className="time-now">{getdate}</span>
          <div className="right">
              <a href="/" className="btn24hqua " title="Mới nhất">
                  <svg className="ic ic-24h">

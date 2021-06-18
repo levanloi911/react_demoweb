@@ -4,7 +4,11 @@ import React, {
     useState,
     useEffect
 } from 'react'
-
+import Section3 from './section3'
+import {Section4} from './section4'
+import {Section6} from './section6'
+import {Section7} from './section7'
+import {Section8} from './section8'
 export function Section2(){
      const [blogs, setBlogs] = useState([]);
      const getBlogs = async () => {
@@ -26,10 +30,9 @@ export function Section2(){
          getBlogs();
      }, []);
      const items = blogs.slice(0, 1);
-     const items1 = blogs.slice(1, 3);
-    const items3 = blogs.slice(3, 4);
     return(
-        <div>      
+        <div>  
+                 
     <section className="section section_topstory">
         
        
@@ -41,19 +44,18 @@ export function Section2(){
                       items.map((blog) => (
                  <article className="item-news full-thumb article-topstory">
                      <div className="thumb-art">
-                         <a href="" className="thumb thumb-5x3" title="Thêm 16 ca Covid-19 cộng đồng">
+                         <a  href = { `/contentblog/${blog.id}/${blog.id_p}/${blog.id_c}`}
+                         className = "thumb thumb-5x3" >
                              <picture>
                                  <img itemprop="contentUrl" loading="lazy" intrinsicsize="680x408"
                                      alt="Thêm 16 ca Covid-19 cộng đồng" className="lazy loading"
-                                     src = {
-                                         blog.image
-                                     }
+                                     src = {blog.image }
                                      />
                              </picture>
                          </a></div>
-                     <h3 className="title-news"><a href="" title="Thêm 16 ca Covid-19 cộng đồng">{blog.title}</a></h3>
+                     <h3 className="title-news"><a href = { `/contentblog/${blog.id}/${blog.id_p}/${blog.id_c}`} >{blog.title}</a></h3>
                      {/* <p className="description"><a href="" title="Thêm 16 ca Covid-19 cộng đồng">{blog.description}</a></p> */}
-                     <p className="extend-lead description mt5" ><a  href="" title="Thêm 16 ca Covid-19 cộng đồng">{blog.description}</a></p>
+                     <p className="extend-lead description mt5" ><a  href = { `/contentblog/${blog.id}/${blog.id_p}/${blog.id_c}`} title="Thêm 16 ca Covid-19 cộng đồng">{blog.description}</a></p>
                      <p className="meta-news"><span className="time-public"><span datetime="2021-05-10 19:24:56"
                                  timeago-id="380">1h trước</span></span><a className="cat c-parsed" title="Sức khỏe"
                              href="/">Sức khỏe</a>
@@ -79,16 +81,16 @@ export function Section2(){
                                  {
                                      blogs.slice(1,3).map((blog1) => (
                                  <li>
-                                     <h3 className="title_news"><a href=""
+                                     <h3 className="title_news"><a href={`/contentblog/${blog1.id}/${blog1.id_p}/${blog1.id_c}`}
                                              title={blog1.title}>{blog1.title}</a>
                                      </h3>
                                      <p className = "description">
-                                          <a >{blog1.description}</a>
+                                          <a href={`/contentblog/${blog1.id}/${blog1.id_p}/${blog1.id_c}`}  >{blog1.description}</a>
                                              <span className="meta-news">
                                              <a className="count_cmt" href="#">
                                                  <svg className="ic ic-comment">
                                                      <use use href = "#Comment-Reg" >
-                                                         <svg id="Comment-Reg" viewBox="0 0 32 32">
+                                                         <svg id="Comment-Reg" viewBox="0 0 32 32"> 
                                                         <path d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z"></path>
                                                     </svg>
                                                      </use>
@@ -152,9 +154,12 @@ export function Section2(){
              </div>
          </aside>
      </div>
-        
  </section>
-
+                <Section3 />
+                < Section4 />
+                < Section6 />
+                < Section7 />
+                < Section8 /> 
   </div>   
  )
 }

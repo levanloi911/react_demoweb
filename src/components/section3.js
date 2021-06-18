@@ -33,7 +33,6 @@ const getcategories = async(parent)=>{
          });
      });
      getblog(parent, arr_c);
-
  })
 }
 const getblog = async (arr_pr, arr_c) => {
@@ -46,13 +45,6 @@ const getblog = async (arr_pr, arr_c) => {
             })
 
         });
-        // const categories = arr_c.map((ct) => {
-        //     const selectedCategories = arr.filter((blog) => blog.idparent === ct.id);
-        //     return {
-        //         ...ct,
-        //         posts: selectedCategories
-        //     }
-        // })
        const post_new= arr_pr.map((pr)=>{
            const selectedPosts = arr.filter((post) => post.id_p === pr.id);
            const selectedCategories = (arr_c || []).filter((ct) => ct.idparent === pr.id);
@@ -60,7 +52,7 @@ const getblog = async (arr_pr, arr_c) => {
                 ...pr,
                 id_c: selectedCategories,
                 posts: selectedPosts
-            }
+            }   
               
            })
            setpost(post_new)

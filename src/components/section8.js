@@ -439,43 +439,43 @@ export function Section8(){
             </div>
             <div id="_xemnhieunhat_v2" className="lazier hidden"></div>
         </div>
-        <div class="col-right col-300">
-            <div style={{}} class="width_common">
+        <div className="col-right col-300">
+            <div style={{}} className="width_common">
                 <div id="vote-32816">
-                    <div class="width_common box_category vote_rating_box thamdo box_100 _noresult" id="boxthamdoykien">
-                        <div class="width_common title-box-category title-box-small">
-                            <h4 class="inner-title">Thăm dò</h4>
+                    <div className="width_common box_category vote_rating_box thamdo box_100 _noresult" id="boxthamdoykien">
+                        <div className="width_common title-box-category title-box-small">
+                            <h4 className="inner-title">Thăm dò</h4>
                         </div>
-                        <div class="content_box_category box_bg_gray width_common">
-                            <div class="title_bx width_common">Bạn có nghĩ rằng sau khi được tiêm vắc xin phòng
+                        <div className="content_box_category box_bg_gray width_common">
+                            <div className="title_bx width_common">Bạn có nghĩ rằng sau khi được tiêm vắc xin phòng
                                 Covid-19, bạn có thể du lịch an toàn không? </div>
-                            <div class="item_row_bx width_common" style={{}}>
-                                <label for="_i118319" class="label_check">
+                            <div className="item_row_bx width_common" style={{}}>
+                                <label for="_i118319" className="label_check">
                                     <input onclick="vneVote.CheckThisVote(this)" id="_i118319" name="answer_32816"
-                                        value="118319" type="radio" class="radio_check" />
+                                        value="118319" type="radio" className="radio_check" />
                                     <span>Có</span>
                                 </label>
                             </div>
-                            <div class="item_row_bx width_common" style={{}}>
-                                <label for="_i118320" class="label_check">
+                            <div className="item_row_bx width_common" style={{}}>
+                                <label for="_i118320" className="label_check">
                                     <input onclick="vneVote.CheckThisVote(this)" id="_i118320" name="answer_32816"
-                                        value="118320" type="radio" class="radio_check" />
+                                        value="118320" type="radio" className="radio_check" />
                                     <span>Không</span>
                                 </label>
                             </div>
-                            <div class="item_row_bx width_common" style={{}}>
-                                <label for="_i118321" class="label_check">
+                            <div className="item_row_bx width_common" style={{}}>
+                                <label for="_i118321" className="label_check">
                                     <input onclick="vneVote.CheckThisVote(this)" id="_i118321" name="answer_32816"
-                                        value="118321" type="radio" class="radio_check" />
+                                        value="118321" type="radio" className="radio_check" />
                                     <span>Không biết</span>
                                 </label>
                             </div>
-                            <div class="box_button width_common">
+                            <div className="box_button width_common">
 
 
-                                <button class="btn_vne btn_normal btn_blue btn_disable btn_vote_rate"
+                                <button className="btn_vne btn_normal btn_blue btn_disable btn_vote_rate"
                                     onclick="goUnicep(this)">Tiếp tục</button>
-                                <div class="right flexbox"
+                                <div className="right flexbox"
                                     style={{alignitems: 'center', justifycontent: 'flex-end', height: '40px'}}>
                                     <span style={{fontsize: '13px', lineheight:'150%',color:'#999999'}}>Hợp tác
                                         bởi:</span>
@@ -490,12 +490,12 @@ export function Section8(){
                         privacy_time="86400" />
                 </div>
             </div>
-            <div class="lazier hidden" id="_box_vote"></div>
-            <ins class="adsbyeclick"></ins>
+            <div className="lazier hidden" id="_box_vote"></div>
+            <ins className="adsbyeclick"></ins>
 
-            <div id="_box_taitro" class="lazier hidden"></div>
-            <div class="box-category">
-                <div class="banner-ads">
+            <div id="_box_taitro" className="lazier hidden"></div>
+            <div className="box-category">
+                <div className="banner-ads">
                     <div id="sis_large3">
                         <script>
                             googTagCode.display.push('sis_large3');
@@ -503,7 +503,7 @@ export function Section8(){
                     </div>
                 </div>
             </div>
-            <div id="_large_3_ov" class="lazier hidden"></div>
+            <div id="_large_3_ov" className="lazier hidden"></div>
         </div>
     </div>
     <div className="container box-news-other-site">

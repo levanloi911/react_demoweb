@@ -386,7 +386,21 @@ button {
     line-height: 30px;
 }
 /* menu */
-
+.main-nav .parent li.home a .ic {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-timing-function: cubic-bezier(.7, 1, .7, 1);
+    transition-timing-function: cubic-bezier(.7, 1, .7, 1);
+}
 .main-nav {
     width: 100%;
     float: left;
@@ -398,6 +412,16 @@ button {
  .main-nav .parent {
     position: relative;
 }
+.wrap-main-nav{
+     position: -webkit-sticky;
+     position: sticky;
+     top: 0;
+     z-index: 999;
+     background-color: #FFFFFF;
+}
+
+
+
 .main-nav .parent {
  
     justify-content: space-between;
@@ -938,15 +962,7 @@ element.style {
 }
 
 
-.description {
-   overflow: hidden;
-   
-   text-overflow: ellipsis;
-   line-height: 140%;
-   -webkit-line-clamp: 5;
-   -webkit-box-orient: vertical;
-   display: -webkit-box;
-}
+
 
 
 
@@ -3951,3 +3967,32 @@ table {
                      #play-controls .circle.active .popupSpan {
                          display: block
                      }
+
+
+                 .main-nav .sub {
+                     border-top: 1px solid #6e2c2d;
+                 }
+
+                 .wrap-all-menu,
+                 .main-nav .sub {
+                     z-index: 991;
+                 }
+
+                 .main-nav .sub {
+                     width: 190px;
+                     background: #fff;
+                     opacity: 0;
+                     visibility: hidden;
+                     position: absolute;
+                     z-index: 2;
+                     left: 0;
+                     top: calc(100% + 20px);
+                     -webkit-box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+                     box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+                     -webkit-transition-duration: 200ms;
+                     transition-duration: 200ms;
+                     -webkit-transition-property: opacity, top, visible;
+                     transition-property: opacity, top, visible;
+                     -webkit-transition-timing-function: cubic-bezier(.7, 1, .7, 1);
+                     transition-timing-function: cubic-bezier(.7, 1, .7, 1);
+                 }
